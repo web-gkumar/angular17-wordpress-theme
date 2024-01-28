@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "application-328219": {
+      "hosting": {
+        "angular-17": [
+          "application-328219"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "application-328219"
+  }
+}
