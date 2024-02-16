@@ -1,0 +1,56 @@
+<section class="authpage w-100 h-100 p-5">
+    <div class="auth p-5">
+        <div class="authlogo text-center"><mat-icon fontIcon="account_circle"></mat-icon>
+            <h3 class="text-uppercase">{{title}}</h3>
+            @if (title == "Login Panel") {
+                <small>Don't have an account <strong (click)="signUp()">Create New Account</strong></small>
+            }@else if((title == "Registation Panel")) {
+                <small>Have your already <strong (click)="signIn()">account ?</strong></small>
+            }
+            
+        </div>
+        <div class="authform my-5">
+            @if (title == "Login Panel") {
+                <form [formGroup]="authForm">
+                    <mat-form-field appearance="outline" class="w-100">
+                       <mat-label>Email Id</mat-label>
+                       <input matInput placeholder="Email Id" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide"><mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                    </mat-form-field>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button mat-flat-button color="primary" class="w-50" (click)="signIn()">Login</button>
+                        <button mat-button>Forget Password</button>
+                    </div>
+                </form>
+            } @else if(title == "Registation Panel"){
+                <form [formGroup]="authForm">
+                    <mat-form-field appearance="outline" class="w-50 pe-2">
+                       <mat-label>Full Name</mat-label>
+                       <input matInput placeholder="Full Name" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-50 ps-2">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput placeholder="Email Id" formControlName="email">
+                     </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-50 pe-2">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide"><mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-50 ps-2">
+                        <mat-label>Conform Password</mat-label>
+                        <input matInput type="password" formControlName="password">
+                    </mat-form-field>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button mat-flat-button color="primary" class="w-50" (click)="signIn()">Login</button>
+                        <button mat-button>Forget Password</button>
+                    </div>
+                </form>     
+            }
+        </div>
+    </div>
+</section>

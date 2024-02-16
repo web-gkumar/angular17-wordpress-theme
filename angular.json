@@ -101,6 +101,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/smart-webcomponents-angular/source/styles/smart.dark.css",
+              "./node_modules/smart-webcomponents-angular/source/styles/smart.default.css",
               "src/styles.scss"
             ],
             "scripts": []

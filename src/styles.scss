@@ -33,7 +33,20 @@ $angular-17-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($angular-17-theme);
 
-/* You can add global styles to this file, and also import other style files */
+
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+
+img{max-width:100%;}
+mat-icon {width:auto !important;height:auto !important;display:inline-block;}
+.mat-drawer-inner-container, .mat-drawer {overflow:visible !important;}
+.mdc-button{padding:5px 10px!important;height:auto!important;font-size:14px!important;}
+
+
+
+
+
+.pagetitle {background:#eee;padding:10px 20px;
+  h3 {font-size:18px;text-transform:uppercase;}
+}

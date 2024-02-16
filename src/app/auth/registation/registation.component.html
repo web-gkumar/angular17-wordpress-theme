@@ -1,0 +1,50 @@
+<section class="authpage w-100 h-100 p-5">
+    <div class="auth p-5">
+        <div class="authlogo text-center"><mat-icon fontIcon="account_circle"></mat-icon>
+            <h3>{{title}}</h3>
+            <small>Don't have an account <strong routerLinkActive='active'>Create New Account</strong></small>
+        </div>
+        <div class="authform my-5">
+            @if (isloginpage) {
+                <form [formGroup]="registation">
+                    <mat-form-field appearance="outline" class="w-100">
+                       <mat-label>Full Name</mat-label>
+                       <input matInput placeholder="Full Name" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput placeholder="Email Id" formControlName="email">
+                     </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" placeholder="Password" formControlName="password">
+                     </mat-form-field>
+                     <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Conform Password</mat-label>
+                        <input matInput type="password" placeholder="Conform Password" formControlName="conform_password">
+                     </mat-form-field>
+                     <section><mat-checkbox formControlName="tc">TC</mat-checkbox></section>
+                     <div class="d-flex align-items-center justify-content-between">
+                        <button mat-flat-button color="primary" class="w-50" (click)="signUp()">Login</button>
+                        <button mat-button>Forget Password</button>
+                    </div>
+                </form> 
+            } @else {
+                <form [formGroup]="registation">
+                    <mat-form-field appearance="outline" class="w-100">
+                       <mat-label>UserName/Email Id</mat-label>
+                       <input matInput placeholder="UserName/Email Id" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Password" formControlName="password">
+                     </mat-form-field>
+                     <div class="d-flex align-items-center justify-content-between">
+                        <button mat-flat-button color="primary" class="w-50">Login</button>
+                        <button mat-button>Forget Password</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</section>

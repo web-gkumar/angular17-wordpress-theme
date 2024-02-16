@@ -1,0 +1,6 @@
+<app-header (menuToggled)="toggle()"/>
+<mat-drawer-container class="h-100">
+    <mat-drawer #drawer mode="side" [opened]="opened"><app-sidenav/></mat-drawer>
+    <div class="admincontainer"><router-outlet /></div>
+    <!-- <app-footer/> -->
+</mat-drawer-container>

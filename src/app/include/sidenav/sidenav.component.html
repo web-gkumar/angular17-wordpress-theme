@@ -1,0 +1,24 @@
+<section class="sidenav bg-dark h-100">
+    <ul>
+            @for (item of menu; track item.title) {
+                @if(item.subMenu === undefined){
+                    <li matRipple [matRippleColor]="color" [routerLink]="item.link" routerLinkActive="active">
+                        <mat-icon [style.color]="item.color">{{ item.icon }}</mat-icon>
+                        <span>{{ item.title }}</span>
+                    </li>
+                }@if(item.subMenu) {
+                    <li  [routerLink]="item.link" routerLinkActive="active">
+                        <mat-icon [style.color]="item.color">{{ item.icon }}</mat-icon>
+                        <span>{{ item.title }}</span>
+                        <div class="megamenu">
+                            @for (data of item.subMenu; track data.title) {
+                               <button class="w-100 text-start py-1 d-block" mat-button [routerLink]="data.link" routerLinkActive="submenuactive">{{ data.title }}</button>
+                            }
+                        </div>
+                    </li> 
+                }
+            } @empty {
+                Empty list of users
+            }
+    </ul>
+</section>

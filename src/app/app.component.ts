@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { PageTitleService } from './shared/services/page-title.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +11,18 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-17';
+  title = 'angular17';
+  currentpageTitle:any = '';
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private pageTitle:PageTitleService) {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      const routeData = this.pageTitle.getRouteData(this.activatedRoute);
+      const title = routeData ? routeData.title : 'Default Title';
+      //this.currentpageTitle = routeData.parrentpage;
+      this.pageTitle.setPageTitle(title);
+    });
+  }
+
+
+  //isLogined:boolean = true;
 }
