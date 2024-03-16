@@ -13,9 +13,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideAnimations(),
+    provideClientHydration(),
+    provideAnimations(),
     provideHttpClient(withFetch()),
     importProvidersFrom(HttpClientModule),
     provideAnimations(),
     provideAnimations()
-]
+  ]
 };

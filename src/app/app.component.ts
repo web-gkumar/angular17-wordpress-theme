@@ -15,12 +15,12 @@ export class AppComponent {
   currentpageTitle:any = '';
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private pageTitle:PageTitleService) {
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      const routeData = this.pageTitle.getRouteData(this.activatedRoute);
-      const title = routeData ? routeData.title : 'Default Title';
-      //this.currentpageTitle = routeData.parrentpage;
-      this.pageTitle.setPageTitle(title);
-    });
+    // this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+    //   const routeData = this.pageTitle.getRouteData(this.activatedRoute);
+    //   const title = routeData ? routeData.title : 'Default Title';
+    //   //this.currentpageTitle = routeData.parrentpage;
+    //   this.pageTitle.setPageTitle(title);
+    // });
   }
 
 

@@ -38,13 +38,13 @@ export class SidenavComponent {
           title: 'Categories',
           icon: 'people',
           color: '#ff7f0e',
-          link: 'categories',
+          link: '/category',
         },
         {
           title: 'Tags',
           icon: 'people',
           color: '#ff7f0e',
-          link: 'tags',
+          link: '/tags',
         },
       ],
     },
@@ -52,52 +52,24 @@ export class SidenavComponent {
       title: 'Media',
       icon: 'collections_bookmark',
       color: '#ff7f0e',
-      subMenu: [
-
-        {
-          title: 'Library',
-          icon: 'money',
-          link: 'library',
-          color: '#ff7f0e',
-        },
-        {
-          title: 'Add New Media',
-          icon: 'people',
-          color: '#ff7f0e',
-          link: 'library',
-        }
-      ],
+      link: '/media',
     },
     {
       title: 'Pages',
       icon: 'layers',
       color: '#ff7f0e',
-      subMenu: [
-
-        {
-          title: 'All Pages',
-          icon: 'money',
-          link: 'pages',
-          color: '#ff7f0e',
-        },
-        {
-          title: 'Add New Page',
-          icon: 'people',
-          color: '#ff7f0e',
-          link: 'pages',
-        }
-      ],
+      link: '/pages'
     },
     {
       title: 'Comments',
       icon: 'forum',
-      link: 'comments',
+      link: '/comments',
       color: '#ff7f0e',
     },
     {
       title: 'Settings',
       icon: 'settings',
-      link: 'settings',
+      link: '/settings',
       color: '#ff7f0e',
     },
 

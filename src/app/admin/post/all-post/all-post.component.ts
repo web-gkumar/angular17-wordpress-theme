@@ -1,91 +1,81 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-
-import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder,FormGroup,FormsModule,ReactiveFormsModule} from '@angular/forms';
+import {TitlebarComponent} from '../../../include/titlebar/titlebar.component';
+import {CrudService} from '../../../shared/services/crud.service';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
-
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatButtonModule} from '@angular/material/button';
+import {EditorModule} from '@tinymce/tinymce-angular';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-all-post',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,MatButtonModule,MatIconModule,MatTableModule, MatCheckboxModule],
+  imports: [TitlebarComponent,MatIconModule,MatButtonModule,MatButtonToggleModule,FormsModule,ReactiveFormsModule,MatSidenavModule,EditorModule,MatExpansionModule,MatCheckboxModule],
   templateUrl: './all-post.component.html',
   styleUrl: './all-post.component.scss'
 })
-export class AllPostComponent {
-createPost!:FormGroup;
-isCreatePost = false;
-constructor( private formBuilder: FormBuilder){
+export class AllPostComponent implements OnInit {
+createForm!:FormGroup;
+collectionName = "post";
+isCreatePost = true;
+allCategory:any;
+allTabs:any;
+tinymceConfig = {
+  height: 500,
+  menubar: false,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table paste code help wordcount'
+  ],
+   toolbar: 'styles fontsizeinput | bold italic underline strikethrough | fontselect fontsizeselect formatselect | align bullist numlist | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment | table link image media pageembed | spellcheckdialog a11ycheck code | inserttemplate',
+
+   // toolbar: 'styles fontsizeinput | aidialog aishortcuts | table link image media pageembed | spellcheckdialog a11ycheck code | inserttemplate',
+
 
 }
+constructor( private formBuilder: FormBuilder, private crudService:CrudService){
+  this.crudService.getAll('category').subscribe(data => {
+    this.allCategory = data;
+  })
+  this.crudService.getAll('tags').subscribe(data => {
+    this.allTabs = data;
+  })
+}
 
-createForm() {
+
+ngOnInit(): void {
+  this.createForm = this.formBuilder.group({
+     title: [""],
+     description: [""]
+  })
+}
+
+showForm() {
   this.isCreatePost = !this.isCreatePost;
 }
 
 
-displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+setAll(data:any,event:any) {
+  if(event.checked) {
+    data['checked'] = event.checked;
+    this.createForm.value.push(data)
   }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  toggleAllRows() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
-    }
-
-    this.selection.select(...this.dataSource.data);
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
+ console.log(data)
+}
 
 
-
-
-
-
-
-
+publishForm() {
+  let formValue = this.createForm.value;
+  this.crudService.createPost(formValue, this.collectionName).subscribe(res => {
+    console.log(res);
+  });
+  this.createForm.reset();
+}
 
 
 

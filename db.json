@@ -1,0 +1,43 @@
+{
+  "category": [
+    {
+      "id": "de13",
+      "category": "Testing",
+      "slug": "Testing",
+      "description": "Testing"
+    },
+    {
+      "id": "6435",
+      "category": "Testing2",
+      "slug": "Testing2",
+      "description": "Testing2"
+    },
+    {
+      "id": "c4f4",
+      "category": "Testing 3",
+      "slug": "Testing 3",
+      "description": "Testing 3"
+    },
+    {
+      "id": "df30",
+      "category": "Gautam",
+      "slug": "Gautam",
+      "description": "Gautam"
+    }
+  ],
+  "tags": [
+    {
+      "id": "a069",
+      "category": "tags",
+      "slug": "tags",
+      "description": "tags"
+    }
+  ],
+  "post": [
+    {
+      "id": "6962",
+      "title": "Testing",
+      "description": "<p>Testing</p>"
+    }
+  ]
+}
